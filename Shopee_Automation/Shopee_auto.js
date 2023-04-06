@@ -3,13 +3,13 @@ const randomWords = require('random-words');
 
 Feature('WP Site Test');
 
-const loopCount = 5;
+const loopCount = 200;
 
 for (let i = 0; i < loopCount; i++) {
   Scenario(`Shopee Navigation - Loop ${i}`, async ({ I }) => {
     I.amOnPage(`https://shopee.ph`);
     I.click('x');
-    I.wait(5);
+    I.wait(3);
     I.click({css: 'input.shopee-searchbar-input__input'});
 
     const randomWord = randomWords();
@@ -20,7 +20,7 @@ for (let i = 0; i < loopCount; i++) {
     I.click('button.btn-solid-primary.shopee-searchbar__search-button');
     I.waitForElement('div.VTjd7p.whIxGK');
     I.click('div.VTjd7p.whIxGK');
-    I.wait(10);
+    I.wait(3);
     I.waitForElement('.product-rating-overview__filter--with-comment');
 
     const comments = await I.grabTextFrom('.product-rating-overview__filter--with-comment');
@@ -30,13 +30,11 @@ for (let i = 0; i < loopCount; i++) {
     if (commentsCount > 100 || hasK) {
       const url = await I.grabCurrentUrl();
       await I.say(`The URL is ${url}`);
-      const dir = './output/';
+      const dir = './Outputs/';
       if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir, { recursive: true });
       }
       fs.appendFileSync(`${dir}/Compiled_URLs.txt`, `${url}\n`);
     }
-
-    I.wait(5);
   });
 }

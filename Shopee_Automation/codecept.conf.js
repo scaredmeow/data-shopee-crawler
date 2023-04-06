@@ -13,7 +13,7 @@ exports.config = {
   helpers: {
     Puppeteer: {
       url: 'https://shopee.ph',
-      show: true,
+      show: false,
       windowSize: '1200x900'
     }
   },
